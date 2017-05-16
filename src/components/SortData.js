@@ -2,7 +2,6 @@
  * Created by David Maser on 16/05/2017.
  */
 import React,{Component} from 'react';
-import DisplayLastNames from "./DisplayLastNames";
 import DisplayCard from "./DisplayCard";
 
 class SortData extends Component{
@@ -16,13 +15,17 @@ class SortData extends Component{
         };
 
         this.changeLetterValue = this.changeLetterValue.bind(this);
+        this.changeDataValue = this.changeDataValue.bind(this)
+    }
 
+    changeDataValue(e){
+        console.log(e.currentTarget);
+        this.setState({overview:this.props.data});
     }
 
     changeLetterValue(e){
         this.setState({letter:e.currentTarget.textContent});
     }
-
 
     getDataIndexes(){
         let indexObj = this.state.data[this.state.node];
@@ -35,7 +38,6 @@ class SortData extends Component{
         }
 
         return indexArray;
-        //console.log(this.state.data[this.state.node]);
     }
 
     getDataEntries(){
@@ -45,7 +47,7 @@ class SortData extends Component{
         for(e in entriesObj){
             //console.log(entriesObj[e].lastName,e);
             entriesArray.push(
-                <DisplayLastNames key={e} lastName={entriesObj[e]['lastName']} data={entriesObj[e]}/>
+                <div key={e} data={e} onClick={this.changeDataValue}>{entriesObj[e]['lastName']}, {entriesObj[e]['firstName']}</div>
             )
         }
 
@@ -61,6 +63,8 @@ class SortData extends Component{
                 <div className="index-view">
                     {this.getDataEntries()}
                 </div>
+                {this.state.overview !== null ? <DisplayCard data={this.state.overview}/> : null}
+
             </div>
 
         )

@@ -9,6 +9,7 @@ class DisplayCard extends Component{
         this.state={
             data:this.props.data
         };
+        console.log(this.props.data);
     }
     render(){
         return(

@@ -11,7 +11,7 @@ class App extends Component {
               url='https://davidemaser.github.io/data/temp-address.json'
               method='get'
               accept='application/json'
-              verbose={true}
+              verbose={false}
           >
               {
                   ({error, result, loading}) => {
