@@ -8,7 +8,7 @@ class SortData extends Component{
     constructor(props){
         super(props);
         this.state={
-            data:this.props.data,
+            json:this.props.json,
             node:'entries',
             letter:'a',
             overview:null
@@ -19,8 +19,9 @@ class SortData extends Component{
     }
 
     changeDataValue(e){
-        console.log(e.currentTarget);
-        this.setState({overview:this.props.data});
+        let curTargetData = e.currentTarget.getAttribute('data');
+        console.log(curTargetData)
+        this.setState({overview:JSON.parse(curTargetData)});
     }
 
     changeLetterValue(e){
@@ -28,7 +29,7 @@ class SortData extends Component{
     }
 
     getDataIndexes(){
-        let indexObj = this.state.data[this.state.node];
+        let indexObj = this.state.json[this.state.node];
         let indexArray = [];
         let a;
         for(a in indexObj){
@@ -41,18 +42,17 @@ class SortData extends Component{
     }
 
     getDataEntries(){
-        let entriesObj = this.state.data[this.state.node][this.state.letter];
+        let entriesObj = this.state.json[this.state.node][this.state.letter];
         let entriesArray = [];
         let e;
         for(e in entriesObj){
-            //console.log(entriesObj[e].lastName,e);
             entriesArray.push(
-                <div key={e} data={e} onClick={this.changeDataValue}>{entriesObj[e]['lastName']}, {entriesObj[e]['firstName']}</div>
+                <div key={e} data={JSON.stringify(entriesObj[e])} onClick={this.changeDataValue}>{entriesObj[e]['lastName']}, {entriesObj[e]['firstName']}</div>
             )
         }
-
         return entriesArray;
     }
+
 
     render(){
         return(
@@ -63,7 +63,7 @@ class SortData extends Component{
                 <div className="index-view">
                     {this.getDataEntries()}
                 </div>
-                {this.state.overview !== null ? <DisplayCard data={this.state.overview}/> : null}
+                {this.state.overview !== null ? <DisplayCard json={this.state.overview}/> : null}
 
             </div>
 

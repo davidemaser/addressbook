@@ -18,7 +18,7 @@ class App extends Component {
                       if (loading) {
                           return <div>loading...</div>;
                       } else {
-                          return <SortData data={result.body.address}/>
+                          return <SortData json={result.body.address}/>
                       }
                   }
               }

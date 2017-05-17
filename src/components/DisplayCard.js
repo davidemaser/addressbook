@@ -7,13 +7,17 @@ class DisplayCard extends Component{
     constructor(props){
         super(props);
         this.state={
-            data:this.props.data
+            json:this.props.json
         };
-        console.log(this.props.data);
+    }
+    componentDidUpdate(){
+        return(
+            <div>{this.state.json.lastName},{this.state.json.firstName}</div>
+        )
     }
     render(){
         return(
-            <div>{this.state.data.lastName},{this.state.data.firstName}</div>
+            <div>{this.state.json.lastName},{this.state.json.firstName}</div>
         )
     }
 }
